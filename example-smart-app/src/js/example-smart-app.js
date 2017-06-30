@@ -26,9 +26,17 @@
           type: 'AllergyIntolerance',
         });
 
-        $.when(pt, obv, allergies).fail(onError);
+        var medications = smart.patient.api.fetchAll({
+          type: 'MedicationStatement',
+        });
 
-        $.when(pt, obv, allergies).done(function(patient, obv, allergies) {
+        var conditions = smart.patient.api.fetchAll({
+          type: 'Condition',
+        });
+
+        $.when(pt, obv, allergies, medications, conditions).fail(onError);
+
+        $.when(pt, obv, allergies, medications, conditions).done(function(patient, obv, allergies, medications, conditions) {
           var byCodes = smart.byCodes(obv, 'code');
           var fname = '';
           var lname = '';
@@ -113,7 +121,7 @@
     $('#holder').show();
     $('#loading').hide();
     $('#fname').html(p.fname + ' ' + p.lname);
-    $('#name_switcher').html(p.fname + ' ' + p.lname);
+    $('#nameswitcher').html(p.fname + ' ' + p.lname);
   };
 
 })(window);
