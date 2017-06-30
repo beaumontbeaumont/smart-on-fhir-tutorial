@@ -70,6 +70,18 @@
           );
           $('#allergies').html(allergiesrow);
 
+          var problemsrow = ''
+
+          conditions.forEach(function(problem){
+            problemsrow += '<li><div class="row"><div class="span7"><dl class="dl-paired margin-none-md"><dt class="x-small-heading text-bold">' + problem.code.text + '</dt>'
+            problemsrow += '<dd>INFOBUTTON</dd></dl></div><div class="span5">'
+            if (typeof problem.dateRecorded !== 'undefined') {
+              problemsrow += '<dl class="dl-paired margin-none"><dt>Date Recorded:</dt><dd>' + problem.dateRecorded + '</dd></dl>'
+            }
+            problemsrow += '</div></div></li>'
+          })
+          $('#problems').html(problemsrow);
+
           var systolicbp = getBloodPressureValue(byCodes('55284-4'),'8480-6');
           var diastolicbp = getBloodPressureValue(byCodes('55284-4'),'8462-4');
           var hdl = byCodes('2085-9');
