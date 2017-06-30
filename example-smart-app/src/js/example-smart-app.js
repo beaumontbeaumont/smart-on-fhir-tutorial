@@ -116,10 +116,21 @@
               if(typeof medication.dosage[0] !== 'undefined' && typeof medication.dosage[0]._text !== 'undefined'){
                 m_dose = medication.dosage[0]._text.extension[0].valueString
               }
-              medicationsrow += '<div class="row"><div class="span12"><dl class="dl-paired margin-none"><dt>Dose:</dt><dd>' + m_dose + '</dd></dl></div></div></li>'
+              medicationsrow += '<div class="row"><div class="span12"><dl class="dl-paired margin-none"><dt>Dose:</dt><dd>' + m_dose + '</dd></dl></div></div>'
+
+              if (typeof medication.medicationCodeableConcept !== 'undefined' && typeof medication.medicationCodeableConcept.coding[0] !== 'undefined') {
+                if(medication.medicationCodeableConcept.coding[0].system == 'http://www.nlm.nih.gov/research/umls/rxnorm'){
+                  m_code_set='2.16.840.1.113883.6.88'
+                }
+                if(typeof m_code_set !== undefined){
+                  info_url = 'https://apps.nlm.nih.gov/medlineplus/services/mpconnect.cfm?mainSearchCriteria.v.cs=' + m_code_set + '&mainSearchCriteria.v.c=' + medication.medicationCodeableConcept.coding[0].code + '&mainSearchCriteria.v.dn=&informationRecipient.languageCode.c=en'
+                  medicationsrow += '<div class="row"><div class="span12"><dl class="dl-paired margin-none"><a href="' + info_url + '" target="">Learn more about this<span class="icon-client-share"></span></a></dl></div></div></li>'
+                }
+              }
             }
           })
           $('#medications').html(medicationsrow);
+
 
           var systolicbp = getBloodPressureValue(byCodes('55284-4'),'8480-6');
           var diastolicbp = getBloodPressureValue(byCodes('55284-4'),'8462-4');
