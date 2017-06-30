@@ -46,6 +46,23 @@
             lname = patient.name[0].family.join(' ');
           }
 
+          var allergiesrow = ''
+          allergies.forEach(function(allergy){
+              allergiesrow += '<li><div class="row"><div class="span7"><h2 class="x-small-heading text-bold margin-none-md">' + allergy.substance.text + '</h2></div>'
+              if (typeof allergy.reaction !== 'undefined') {
+                allergy.reaction.forEach(function(reaction){
+                  allergiesrow += '<div class="span5 span-last"><dl class="dl-flow margin-none"><dt>Reactions:</dt>'
+                  reaction.manifestation.forEach(function(manifestation){
+                    allergiesrow += '<dd>' + manifestation.text + '</dd>'
+                  });
+                  allergiesrow += '</dl></div>'
+                });
+              }
+              allergiesrow += '</div></li>'
+            }
+          );
+          $('#allergies').html(allergiesrow);
+
           var systolicbp = getBloodPressureValue(byCodes('55284-4'),'8480-6');
           var diastolicbp = getBloodPressureValue(byCodes('55284-4'),'8462-4');
           var hdl = byCodes('2085-9');
