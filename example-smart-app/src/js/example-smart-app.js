@@ -32,6 +32,9 @@
 
         var conditions = smart.patient.api.fetchAll({
           type: 'Condition',
+          query: {
+            category: 'problem',
+          }
         });
 
         $.when(pt, obv, allergies, medications, conditions).fail(onError);
