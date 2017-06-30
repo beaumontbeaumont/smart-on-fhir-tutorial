@@ -95,6 +95,32 @@
           })
           $('#problems').html(problemsrow);
 
+          var medicationsrow = ''
+
+          medications.forEach(function(medication){
+            if(medication.status == 'entered-in-error'){
+              return;
+            }
+
+            medicationsrow += '<li><div><dl class="dl-paired"><dt class="x-small-heading text-bold">' + medication.medicationCodeableConcept.text + '</dt></dl></div>'
+            if(typeof medication.informationSource !== undefined || typeof medication.effectivePeriod !== undefined){
+              medicationsrow += '<div class="row"><div class="span5"><dl class="dl-paired margin-none">'
+              if(typeof medication.informationSource !== 'undefined' && typeof medication.informationSource.display !== 'undefined'){
+                medicationsrow += '<dt>Ordered By</dt><dd>' + medication.informationSource.display + '</dd>'
+              }
+              medicationsrow += '</dl></div><div class="span7"><dl class="dl-paired margin-none">'
+              if(typeof medication.effectivePeriod !== 'undefined' && typeof medication.effectivePeriod.start !== 'undefined'){
+                medicationsrow += '<dt>Date Started On</dt><dd>' + medication.effectivePeriod.start + '</dd>'
+              }
+              medicationsrow += '</dl></div></div><div class="section-small"></div>'
+              if(typeof medication.dosage[0] !== 'undefined' && typeof medication.dosage[0]._text !== 'undefined'){
+                m_dose = medication.dosage[0]._text.extension[0].valueString
+              }
+              medicationsrow += '<div class="row"><div class="span12"><dl class="dl-paired margin-none"><dt>Dose:</dt><dd>' + m_dose + '</dd></dl></div></div></li>'
+            }
+          })
+          $('#medications').html(medicationsrow);
+
           var systolicbp = getBloodPressureValue(byCodes('55284-4'),'8480-6');
           var diastolicbp = getBloodPressureValue(byCodes('55284-4'),'8462-4');
           var hdl = byCodes('2085-9');
