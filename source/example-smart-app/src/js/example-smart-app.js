@@ -30,13 +30,6 @@
 
         $.when(pt, obv, allergies).done(function(patient, obv, allergies) {
           var byCodes = smart.byCodes(obv, 'code');
-          var gender = patient.gender;
-          var dob = new Date(patient.birthDate);
-          var day = dob.getDate();
-          var monthIndex = dob.getMonth() + 1;
-          var year = dob.getFullYear();
-
-          var dobStr = monthIndex + '/' + day + '/' + year;
           var fname = '';
           var lname = '';
 
@@ -45,19 +38,14 @@
             lname = patient.name[0].family.join(' ');
           }
 
-          var height = byCodes('8302-2');
           var systolicbp = getBloodPressureValue(byCodes('55284-4'),'8480-6');
           var diastolicbp = getBloodPressureValue(byCodes('55284-4'),'8462-4');
           var hdl = byCodes('2085-9');
           var ldl = byCodes('2089-1');
 
           var p = defaultPatient();
-          p.birthdate = dobStr;
-          p.gender = gender;
           p.fname = fname;
           p.lname = lname;
-          p.age = parseInt(calculateAge(dob));
-          p.height = getQuantityValueAndUnit(height[0]);
 
           if (typeof systolicbp != 'undefined')  {
             p.systolicbp = systolicbp;
@@ -86,10 +74,6 @@
     return {
       fname: {value: ''},
       lname: {value: ''},
-      gender: {value: ''},
-      birthdate: {value: ''},
-      age: {value: ''},
-      height: {value: ''},
       systolicbp: {value: ''},
       diastolicbp: {value: ''},
       ldl: {value: ''},
@@ -114,27 +98,6 @@
     return getQuantityValueAndUnit(formattedBPObservations[0]);
   }
 
-  function isLeapYear(year) {
-    return new Date(year, 1, 29).getMonth() === 1;
-  }
-
-  function calculateAge(date) {
-    if (Object.prototype.toString.call(date) === '[object Date]' && !isNaN(date.getTime())) {
-      var d = new Date(date), now = new Date();
-      var years = now.getFullYear() - d.getFullYear();
-      d.setFullYear(d.getFullYear() + years);
-      if (d > now) {
-        years--;
-        d.setFullYear(d.getFullYear() - 1);
-      }
-      var days = (now.getTime() - d.getTime()) / (3600 * 24 * 1000);
-      return years + days / (isLeapYear(now.getFullYear()) ? 366 : 365);
-    }
-    else {
-      return undefined;
-    }
-  }
-
   function getQuantityValueAndUnit(ob) {
     if (typeof ob != 'undefined' &&
         typeof ob.valueQuantity != 'undefined' &&
@@ -149,16 +112,7 @@
   window.drawVisualization = function(p) {
     $('#holder').show();
     $('#loading').hide();
-    $('#fname').html(p.fname);
-    $('#lname').html(p.lname);
-    $('#gender').html(p.gender);
-    $('#birthdate').html(p.birthdate);
-    $('#age').html(p.age);
-    $('#height').html(p.height);
-    $('#systolicbp').html(p.systolicbp);
-    $('#diastolicbp').html(p.diastolicbp);
-    $('#ldl').html(p.ldl);
-    $('#hdl').html(p.hdl);
+    $('#fname').html(p.fname + ' ' + p.lname);
   };
 
 })(window);
