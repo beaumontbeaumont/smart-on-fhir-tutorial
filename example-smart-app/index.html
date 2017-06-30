@@ -1,68 +1,229 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
-    <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
-    <title>Baseline Health - Lab Results</title>
+<!doctype html>
+<!--[if (gt IE 9)|!(IE)]><!--><html class="no-js off-canvas-closed" lang="en-us" dir="ltr"  ><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Healthe Clinic - Health Profile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
-    <link rel='stylesheet' type='text/css' href='./src/css/example-smart-app.css'>
-  </head>
-  <body>
-    <div id='errors'>
-    </div>
-    <div id="loading" class="spinner">
-      <div class="bounce1"></div>
-      <div class="bounce2"></div>
-      <div class="bounce3"></div>
-    </div>
-    <div id='holder' >
-      <h2>Example-SMART-App</h2>
+  <meta name="description" content="CernerClinic.com is the website for the Cerner Healthe Clinic, providing Cerner associates and their families patient-centered, integrative quality care. View information about the clinic or sign in with your Cerner Health account to access online patient services." />
+  <meta name="keywords" content="cernerclinic, cerner clinic, cerner healthe clinic, healthe clinic, innovations clinic, whq clinic, patient portal" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-      <h2>Patient Resource</h2>
-      <table>
-        <tr>
-          <th>First Name:</th>
-          <td id='fname'></td>
-        </tr>
-        <tr>
-          <th>Last Name:</th>
-          <td id='lname'></td>
-        </tr>
-        <tr>
-          <th>Gender:</th>
-          <td id='gender'></td>
-        </tr>
-        <tr>
-          <th>Date of Birth:</th>
-          <td id='birthdate'></td>
-        </tr>
-        <tr>
-          <th>Age:</th>
-          <td id='age'></td>
-        </tr>
-      </table>
-      <section id="healthProfileAllergies" data-print="true" class="section-xxlarge allergies fade results-section in">
-      <h2 class="arrange text-normal">
-        <div class="arrange-fit"><span class="icon-allergies icon-block"></span></div>
-        <div class="arrange-fill"><span class="section-title">Current Allergies</span></div>
-      </h2>
-      <ul class="list-divided-large">
-        <li>
+  <script>
+    var HealtheLife = window.HealtheLife || {};
+    window.HealtheLife = HealtheLife;
+    HealtheLife.staticUrl = "https://dpfzcqrxx682t.cloudfront.net/s/portal/";
+    HealtheLife.list_separator = ", "; // i18n list separator
+  </script>
+
+  <script type="text/javascript" src="https://dpfzcqrxx682t.cloudfront.net/s/portal/lib/modernizr/modernizr.js"></script>
+
+  <script type="text/javascript">/*<![CDATA[*/var g_media_url="https://dpfzcqrxx682t.cloudfront.net/s/portal/";/*]]>*/</script>
+
+  <link href="https://dpfzcqrxx682t.cloudfront.net/s/portal/css/lib.9a04b4895ece.css" rel="stylesheet" type="text/css" media="screen,projection,print" />
+  <!--[if ! lte IE 8]><!--><link rel="stylesheet" type="text/css" href="https://d2c58d41sp3pjk.cloudfront.net/standard-Cg3F92UR7-8479ffef81c0.css" media="screen, projection, print"><!--<![endif]-->
+</head>
+
+<body class="health-record">
+  <!-- Top level app navigation -->
+  <header class="site-header" data-print="false">
+    <div class="container-fluid">
+        <div class="site-auxiliary-nav">
+          <ul class="nav-auxiliary">
+              <li class="nav-auxiliary--item">
+                  <div class="dropdown-end" id="fname">Alex Beaumont</div>
+              </li>
+          </ul>
+        </div>
+    </div>
+  </header>
+
+  <!-- Primary site navigation container -->
+  <div class="site-menu">
+    <div class="site-menu-inner">
+      <div class="site-branding site-branding-primary site-branding-flex"></div>
+
+        <nav>
+          <ul class="nav-primary list-unstyled">
+              <li class="">
+                <a href="/person/f755757b4d7d4d9886c4821748ef5777/health-record/profile" data-js="nav--parent" None target="_self" class="is-active is-sublevel-active nav--parent">
+                  <div class="arrange arrange-middle">
+                    <div class="arrange-fit">
+                      <span class="icon-client-health-record icon-block nav--icon" ></span>
+                    </div>
+                    <div class="arrange-fill">Health Record</div>
+                  </div>
+                </a>
+
+              </li>
+
+              <li class="">
+                <a href="/messaging/" data-js="nav--parent" None target="_self" class=" nav--parent">
+                  <div class="arrange arrange-middle">
+                    <div class="arrange-fit">
+                      <span class="icon-client-messaging icon-block nav--icon"  data-badge-url="/messaging/badge/" ></span>
+                    </div>
+                    <div class="arrange-fill">Messaging</div>
+                  </div>
+                </a>
+              </li>
+
+              <li class="">
+                <a href="/appointments" data-js="nav--parent" None target="_self" class=" nav--parent">
+                  <div class="arrange arrange-middle">
+                    <div class="arrange-fit">
+                      <span class="icon-client-appointments icon-block nav--icon"  data-badge-url="/appointments/badge/" ></span>
+                    </div>
+                    <div class="arrange-fill">Appointments</div>
+                  </div>
+                </a>
+              </li>
+          </ul>
+        </nav>
+
+    </div><!--/site-menu-inner-->
+  </div><!--/site-menu-->
+
+
+  <div class="site-container">
+    <div class="container-fluid-large">
+      <div class="site-mask" data-js="site-mask"></div>
+      <div class="site-container-inner">
+        <div id="main-content" class="site-main">
+
+
+  <div id="health-profile" class="health-profile">
+
+      <h1 class="page-title">
+        <span>Health Profile</span>
+      </h1>
+
+      <div class="standout standout-notice">
+        <p>The information provided below reflects the information in the electronic medical record. Medications and Allergies show only current information - they do not display past medications or allergies.</p>
+      </div>
+
+<div class="switcher switcher-single">
+  <div id="primary-proxy-switcher" class="switcher--body" tabindex="0" >
+    <div class="arrange arrange-middle">
+      <div class="arrange-fit" data-print="false">
+        <span class="switcher--icon icon-client-user-alt"></span>
+      </div>
+      <div class="arrange-fill">
+          <div class="switcher--active">Alex Beaumont</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+        <section id="healthProfileMedications" data-print="true" class="section-xxlarge medications fade results-section">
           <div class="row">
-            <div class="span7">
-              <h2 class="x-small-heading text-bold margin-none-md">sulfa drugs</h2>
-            </div>
-            <div class="span5 span-last">
-              <dl class="dl-flow margin-none">
-                <dt>Reactions:</dt>
-                <dd>rash</dd>
-              </dl>
+            <div class="span9">
+              <h2 class="arrange text-normal">
+                <div class="arrange-fit"><span class="icon-medications icon-block"></span></div>
+                <div class="arrange-fill"><span class="section-title">Current Medications</span></div>
+              </h2>
             </div>
           </div>
-        </li>
-      </ul>
-      </section>
-    </div>
+          <a data-analytics-category="Health Profile" data-analytics-label="Medications" class="health-profile-link" href="/person/f755757b4d7d4d9886c4821748ef5777/health-record/medications/">Medications</a>
+        </section>
+
+        <section id="healthProfileImmunizations" data-print="true" class="section-xxlarge immunizations fade results-section">
+          <h2 class="arrange text-normal">
+            <div class="arrange-fit"><span class="icon-immunization icon-block"></span></div>
+            <div class="arrange-fill"><span class="section-title">Immunizations</span></div>
+          </h2>
+          <ul class="list-divided-large">
+          <li>
+            <div class="row">
+              <div class="span7">
+                <dl class="dl-paired margin-none-md">
+                  <dt class="x-small-heading text-bold">influenza (IIV4)</dt>
+                  <dd>
+                      <a href="/person/f755757b4d7d4d9886c4821748ef5777/health-content/?term=influenza+%28IIV4%29&amp;referrer=https%3A%2F%2Fcernerclinic.iqhealth.com%2Fperson%2Ff755757b4d7d4d9886c4821748ef5777%2Fhealth-record%2Fprofile&amp;age=35&amp;search_type=meds&amp;gender=M&amp;help_text=" target="">
+                        Learn more about this<span class="icon-client-share"></span>
+                      </a>
+                  </dd>
+                </dl>
+              </div>
+              <div class="span5">
+                <dl class="dl-paired margin-none">
+                  <dt>Date Received:</dt>
+                  <dd>Oct 06, 2015</dd>
+                </dl>
+              </div>
+            </div>
+          </li>
+        </ul>
+        </section>
+
+        <section id="healthProfileAllergies" data-print="true" class="section-xxlarge allergies fade results-section">
+          <h2 class="arrange text-normal">
+            <div class="arrange-fit"><span class="icon-allergies icon-block"></span></div>
+            <div class="arrange-fill"><span class="section-title">Current Allergies</span></div>
+          </h2>
+
+          <ul class="list-divided-large">
+
+
+
+
+            <li>
+              <div class="row">
+                <div class="span7">
+                  <h2 class="x-small-heading text-bold margin-none-md"><bdi dir="auto">sulfa drugs</bdi></h2>
+                </div>
+                <div class="span5 span-last">
+
+                  <dl class="dl-flow margin-none">
+
+
+                    <dt>Reactions:</dt>
+
+                    <dd><bdi dir="auto">rash</bdi></dd>
+
+                  </dl>
+
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <div class="row">
+                <div class="span7">
+                  <h2 class="x-small-heading text-bold margin-none-md"><bdi dir="auto">sulfADIAZINE</bdi></h2>
+                </div>
+                <div class="span5 span-last">
+
+                </div>
+              </div>
+            </li>
+
+
+          </ul>
+
+        </section>
+
+        <section id="healthProfileProblems" data-print="true" class="problems fade results-section">
+          <h2 class="arrange text-normal">
+            <div class="arrange-fit"><span class="icon-conditions icon-block"></span></div>
+            <div class="arrange-fill"><span class="section-title">Health Issues</span></div>
+          </h2>
+          <a data-analytics-category="Health Profile" data-analytics-label="Health Issues" class="health-profile-link" href="/person/f755757b4d7d4d9886c4821748ef5777/health-record/problems/">Health Issues</a>
+        </section>
+
+  </div>
+
+            </div><!--/site-content-->
+          </div><!--/site-body-->
+
+      </div><!--/site-container-inner-->
+    </div><!--/container-fluid-large-->
+  </div><!--site-container-->
+
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <script type="text/javascript" src="https://dpfzcqrxx682t.cloudfront.net/s/portal/jsi18n/en-us/djangojs.54595b86107c.js"></script>
+  <script type="text/javascript" src="https://dpfzcqrxx682t.cloudfront.net/s/portal/js/r.c5084fa4e458.js" charset="utf-8"></script>
     <script src='./lib/es6-shim-0.35.1.min.js'></script>
     <script src='./src/js/example-smart-app.js'></script>
     <script src='./lib/fhir-client.js'></script>
