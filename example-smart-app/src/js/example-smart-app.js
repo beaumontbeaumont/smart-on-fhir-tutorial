@@ -113,6 +113,7 @@
     $('#holder').show();
     $('#loading').hide();
     $('#fname').html(p.fname + ' ' + p.lname);
+    $('#name_switcher').html(p.fname + ' ' + p.lname);
   };
 
 })(window);
