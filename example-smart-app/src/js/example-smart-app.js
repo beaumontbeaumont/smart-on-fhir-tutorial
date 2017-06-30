@@ -74,7 +74,20 @@
 
           conditions.forEach(function(problem){
             problemsrow += '<li><div class="row"><div class="span7"><dl class="dl-paired margin-none-md"><dt class="x-small-heading text-bold">' + problem.code.text + '</dt>'
-            problemsrow += '<dd>INFOBUTTON</dd></dl></div><div class="span5">'
+            if (typeof problem.code !== 'undefined' && typeof problem.code.coding !== 'undefined') {
+              if(problem.code.coding[0].system == 'http://hl7.org/fhir/sid/icd-10-cm'){
+                p_code_set='2.16.840.1.113883.6.90'
+              }
+              if(problem.code.coding[0].system == 'http://snomed.info/sct'){
+                p_code_set='2.16.840.1.113883.6.96'
+
+              }
+              if(typeof p_code_set !== undefined){
+                info_url = 'https://apps.nlm.nih.gov/medlineplus/services/mpconnect.cfm?mainSearchCriteria.v.cs=' + p_code_set + '&mainSearchCriteria.v.c=' + problem.code.coding[0].code + '&mainSearchCriteria.v.dn=&informationRecipient.languageCode.c=en'
+                problemsrow += '<dd><a href="' + info_url + '" target="">Learn more about this<span class="icon-client-share"></span></a></dd>'
+              }
+            }
+            problemsrow += '</dl></div><div class="span5">'
             if (typeof problem.dateRecorded !== 'undefined') {
               problemsrow += '<dl class="dl-paired margin-none"><dt>Date Recorded:</dt><dd>' + problem.dateRecorded + '</dd></dl>'
             }
