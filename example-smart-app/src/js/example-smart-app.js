@@ -37,9 +37,13 @@
           }
         });
 
-        $.when(pt, obv, allergies, medications, conditions).fail(onError);
+        var immunizations = smart.patient.api.fetchAll({
+          type: 'Immunization',
+        });
 
-        $.when(pt, obv, allergies, medications, conditions).done(function(patient, obv, allergies, medications, conditions) {
+        $.when(pt, obv, allergies, medications, conditions, immunizations).fail(onError);
+
+        $.when(pt, obv, allergies, medications, conditions, immunizations).done(function(patient, obv, allergies, medications, conditions, immunizations) {
           var byCodes = smart.byCodes(obv, 'code');
           var fname = '';
           var lname = '';
